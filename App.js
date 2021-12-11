@@ -1,6 +1,15 @@
-import * as React from "react";
-import RootNavigation from "./navigation";
+import * as React from 'react';
+import { LogBox } from 'react-native';
+import RootNavigation from './navigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
-  return <RootNavigation />;
+  LogBox.ignoreLogs(['Warning: ...']); //Hide warnings
+
+  LogBox.ignoreAllLogs();
+  return (
+    <SafeAreaProvider>
+      <RootNavigation />
+    </SafeAreaProvider>
+  );
 }

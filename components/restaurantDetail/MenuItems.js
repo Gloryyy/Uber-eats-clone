@@ -1,20 +1,20 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { Divider } from "react-native-elements";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { Divider } from 'react-native-elements';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const styles = StyleSheet.create({
   menuItemStyle: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     margin: 20,
   },
 
   titleStyle: {
     fontSize: 19,
-    fontWeight: "600",
+    fontWeight: '700',
   },
 });
 
@@ -28,7 +28,7 @@ export default function MenuItems({
 
   const selectItem = (item, checkboxValue) =>
     dispatch({
-      type: "ADD_TO_CART",
+      type: 'ADD_TO_CART',
       payload: {
         ...item,
         restaurantName: restaurantName,
@@ -52,7 +52,7 @@ export default function MenuItems({
               <></>
             ) : (
               <BouncyCheckbox
-                iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
+                iconStyle={{ borderColor: 'lightgray', borderRadius: 0 }}
                 fillColor="green"
                 isChecked={isFoodInCart(food, cartItems)}
                 onPress={(checkboxValue) => selectItem(food, checkboxValue)}
@@ -73,7 +73,7 @@ export default function MenuItems({
 }
 
 const FoodInfo = (props) => (
-  <View style={{ width: 240, justifyContent: "space-evenly" }}>
+  <View style={{ width: 240, justifyContent: 'space-evenly' }}>
     <Text style={styles.titleStyle}>{props.food.title}</Text>
     <Text>{props.food.description}</Text>
     <Text>{props.food.price}</Text>

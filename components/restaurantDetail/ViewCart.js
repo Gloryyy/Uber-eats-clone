@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
-import OrderItem from "./OrderItem";
-import firebase from "../../firebase";
-import LottieView from "lottie-react-native";
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
+import OrderItem from './OrderItem';
+import firebase from '../../firebase';
+import LottieView from 'lottie-react-native';
 
 export default function ViewCart({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -14,18 +14,18 @@ export default function ViewCart({ navigation }) {
   );
 
   const total = items
-    .map((item) => Number(item.price.replace("$", "")))
+    .map((item) => Number(item.price.replace('$', '')))
     .reduce((prev, curr) => prev + curr, 0);
 
-  const totalUSD = total.toLocaleString("en", {
-    style: "currency",
-    currency: "USD",
+  const totalUSD = total.toLocaleString('en', {
+    style: 'currency',
+    currency: 'USD',
   });
 
   const addOrderToFireBase = () => {
     setLoading(true);
     const db = firebase.firestore();
-    db.collection("orders")
+    db.collection('orders')
       .add({
         items: items,
         restaurantName: restaurantName,
@@ -34,7 +34,7 @@ export default function ViewCart({ navigation }) {
       .then(() => {
         setTimeout(() => {
           setLoading(false);
-          navigation.navigate("OrderCompleted");
+          navigation.navigate('OrderCompleted');
         }, 2500);
       });
   };
@@ -42,33 +42,33 @@ export default function ViewCart({ navigation }) {
   const styles = StyleSheet.create({
     modalContainer: {
       flex: 1,
-      justifyContent: "flex-end",
-      backgroundColor: "rgba(0,0,0,0.7)",
+      justifyContent: 'flex-end',
+      backgroundColor: 'rgba(0,0,0,0.7)',
     },
 
     modalCheckoutContainer: {
-      backgroundColor: "white",
+      backgroundColor: 'white',
       padding: 16,
       height: 500,
       borderWidth: 1,
     },
 
     restaurantName: {
-      textAlign: "center",
-      fontWeight: "600",
+      textAlign: 'center',
+      fontWeight: '600',
       fontSize: 18,
       marginBottom: 10,
     },
 
     subtotalContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       marginTop: 15,
     },
 
     subtotalText: {
-      textAlign: "left",
-      fontWeight: "600",
+      textAlign: 'left',
+      fontWeight: '600',
       fontSize: 15,
       marginBottom: 10,
     },
@@ -87,33 +87,33 @@ export default function ViewCart({ navigation }) {
               <Text style={styles.subtotalText}>Subtotal</Text>
               <Text>{totalUSD}</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
               <TouchableOpacity
                 style={{
                   marginTop: 20,
-                  backgroundColor: "black",
-                  alignItems: "center",
+                  backgroundColor: 'black',
+                  alignItems: 'center',
                   padding: 13,
                   borderRadius: 30,
                   width: 300,
-                  position: "relative",
+                  position: 'relative',
                 }}
                 onPress={() => {
                   addOrderToFireBase();
                   setModalVisible(false);
                 }}
               >
-                <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
+                <Text style={{ color: 'white', fontSize: 20 }}>Checkout</Text>
                 <Text
                   style={{
-                    position: "absolute",
+                    position: 'absolute',
                     right: 20,
-                    color: "white",
+                    color: 'white',
                     fontSize: 15,
                     top: 17,
                   }}
                 >
-                  {total ? totalUSD : ""}
+                  &#x00024;{total ? totalUSD : ''}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -137,38 +137,46 @@ export default function ViewCart({ navigation }) {
         <View
           style={{
             flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "row",
-            position: "absolute",
-            bottom: 130,
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            position: 'absolute',
+            bottom: 230,
             zIndex: 999,
           }}
         >
           <View
             style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              width: "100%",
+              flexDirection: 'row',
+              justifyContent: 'center',
+              width: '100%',
             }}
           >
             <TouchableOpacity
               style={{
                 marginTop: 20,
-                backgroundColor: "black",
-                flexDirection: "row",
-                justifyContent: "flex-end",
+                backgroundColor: 'black',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
                 padding: 15,
                 borderRadius: 30,
                 width: 300,
-                position: "relative",
+                position: 'relative',
               }}
               onPress={() => setModalVisible(true)}
             >
-              <Text style={{ color: "white", fontSize: 20, marginRight: 30 }}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 20,
+                  marginRight: 30,
+                }}
+              >
                 View Cart
               </Text>
-              <Text style={{ color: "white", fontSize: 20 }}>{totalUSD}</Text>
+              <Text style={{ color: 'white', fontSize: 20 }}>
+                &#x00024;{totalUSD}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -178,18 +186,18 @@ export default function ViewCart({ navigation }) {
       {loading ? (
         <View
           style={{
-            backgroundColor: "black",
-            position: "absolute",
+            backgroundColor: 'black',
+            position: 'absolute',
             opacity: 0.6,
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-            width: "100%",
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            width: '100%',
           }}
         >
           <LottieView
             style={{ height: 200 }}
-            source={require("../../assets/animations/scanner.json")}
+            source={require('../../assets/animations/scanner.json')}
             autoPlay
             speed={3}
           />
